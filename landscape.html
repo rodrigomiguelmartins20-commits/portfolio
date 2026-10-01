@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Urbano | Rodrigo Martins</title>
+  <title>Paisagem | Rodrigo Martins</title>
   <style>
     :root { --bg:#0b0b0f; --text:#f6f6f8; --muted:#9ca3af; --accent:#f8b400; --border:rgba(255,255,255,.08); --radius:22px; }
     *{box-sizing:border-box}img{max-width:100%;height:auto;display:block;}
@@ -83,7 +83,7 @@
   <main>
     <section>
       <div class="section-title">
-        <h1>Urbano</h1>
+        <h1>Paisagem</h1>
       </div>
       <a class="back-link" href="portfolio.html">← Voltar à galeria</a>
       <div id="gallery" class="portfolio-grid"></div>
@@ -99,7 +99,7 @@
   </main>
   <script>
     var images = [
-      "urban (1).JPG","urban (1).JPEG","urban (2).JPG","urban (3).JPG","urban (4).JPG","urban (5).JPG","urban (6).JPG","urban (7).JPG","urban (8).JPG","urban (9).JPG","urban (10).JPG","urban (11).JPG","urban (12).JPG","urban (13).JPG","urban (14).JPG","urban (15).JPG","urban (16).JPG","urban (17).JPG","urban (18).JPG","urban (19).JPG","urban (20).JPG","urban (21).JPG","urban (22).JPG","urban (23).JPG","urban (24).JPG","urban (25).JPG","urban (26).JPG","urban (27).JPG","urban (28).JPG","urban (29).JPG","urban (30).JPG","urban (31).JPG","urban (32).JPG","urban (33).JPG","urban (34).JPG","urban (35).JPG","urban (36).JPG","urban (37).JPG","urban (38).JPG","urban (39).JPG","urban (40).JPG","urban (41).JPG","urban (42).JPG","urban (43).JPG","urban (44).JPG","urban (45).JPG","urban (46).JPG","urban.JPG", "urban (47).JPG","urban (48).JPG","urban (49).JPG","urban (50).JPG","urban (51).JPG","urban (52).JPG","urban (53).JPG","urban (54).JPG","urban (55).JPG","urban (56).JPG","urban (57).JPG","urban (58).JPG","urban (59).JPG","urban (60).JPG"
+      "landscape (1).JPG","landscape (10).JPG","landscape (11).JPG","landscape (12).JPG","landscape (2).JPG","landscape (3).JPG","landscape (4).JPG","landscape (5).JPG","landscape (6).JPG","landscape (7).JPG","landscape (8).jpg","landscape (9).JPG", "landscape (13).JPG","landscape (14).JPG","landscape (15).JPG","landscape (16).JPG","landscape (17).JPG","landscape (18).JPG","landscape (19).JPG","landscape (20).JPG"
     ];
     var gallery = document.getElementById('gallery');
     function shuffle(array) {
@@ -120,7 +120,7 @@
     var html = '';
     for (var i = 0; i < images.length; i++) {
       var name = images[i];
-      html += '<div class="portfolio-item" data-index="' + i + '"><img src="' + encodeURI(name) + '" alt="Urban image"></div>';
+      html += '<div class="portfolio-item" data-index="' + i + '"><img src="' + encodeURI(name) + '" alt="Landscape image"></div>';
     }
     gallery.innerHTML = html;
     gallery.querySelectorAll('.portfolio-item').forEach(function(item) {
