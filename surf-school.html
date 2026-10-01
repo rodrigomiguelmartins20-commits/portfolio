@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Escola de Surf | Rodrigo Martins</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;900&display=swap');
+    :root { --bg:#0b0b0f; --text:#f6f6f8; --muted:#9ca3af; --accent:#f8b400; --border:rgba(255,255,255,.08); --radius:24px; }
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:'Inter',system-ui,sans-serif;background:radial-gradient(circle at top,rgba(248,180,0,.15),transparent 30%),linear-gradient(180deg,#0b0b0f 0%,#070708 60%,#0f0f14 100%);color:var(--text);line-height:1.6;}
+    header{position:sticky;top:0;z-index:10000;display:flex;justify-content:center;align-items:center;padding:20px 36px;backdrop-filter:blur(20px);background:rgba(7,7,10,.9);border-bottom:1px solid var(--border);position:relative;}
+    .brand{position:absolute;left:36px;font-size:.95rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);}
+    nav{display:flex;gap:72px;}
+    nav a{color:var(--muted);text-decoration:none;font-size:.95rem;transition:color .2s ease;}
+    nav a.active,nav a:hover{color:#fff;}
+    main{width:min(1120px,calc(100%-32px));max-width:1120px;margin:0 auto;padding:40px 20px 60px;}
+    .section-title{margin-bottom:24px;}
+    .section-title h1{font-size:clamp(3rem,5vw,4.5rem);line-height:0.95;margin:0;font-family:'Playfair Display',Georgia,serif;}
+    .section-text{color:var(--muted);max-width:760px;margin:18px 0 32px;font-size:1.05rem;}
+    .image-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-top:10px;position:relative;z-index:1;}
+    .image-card{position:relative;display:block;width:100%;aspect-ratio:4 / 5;border-radius:0;overflow:hidden;border:none;background:transparent;padding:0;z-index:0;}
+    .image-card img{width:100%;height:auto;object-fit:contain;transition:transform .2s ease;display:block;}
+    .image-card:hover img{transform:scale(1.02);}
+    .back-link{display:inline-flex;margin-top:32px;padding:12px 22px;border-radius:999px;border:1px solid rgba(255,255,255,.16);color:#fff;text-decoration:none;background:rgba(255,255,255,.05);}
+    .back-link:hover{background:rgba(248,180,0,.15);}
+    .lightbox{position:fixed;inset:0;background:rgba(0,0,0,.92);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .2s ease;z-index:10001;}
+    .lightbox.active{opacity:1;pointer-events:auto;}
+    .lightbox-panel{position:relative;width:min(100%,1080px);max-height:90vh;display:flex;align-items:center;justify-content:center;}
+    .lightbox-content{width:100%;max-height:90vh;}
+    .lightbox img{width:100%;height:auto;display:block;max-height:90vh;object-fit:contain;}
+    .lightbox-button,.lightbox-close{position:absolute;border:none;background:rgba(255,255,255,.08);color:#fff;width:48px;height:48px;border-radius:999px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.5rem;}
+    .lightbox-button:hover,.lightbox-close:hover{background:rgba(255,255,255,.18);}
+    .lightbox-close{top:-10px;right:-10px;}
+    .lightbox-button.prev{left:-60px;}
+    .lightbox-button.next{right:-60px;}
+    footer{text-align:center;color:#717279;padding:28px 0 16px;font-size:.95rem;}
+    @media(max-width:980px){header{justify-content:space-between;align-items:center;padding-bottom:0;}.brand{position:static;left:auto;font-size:0.85rem;white-space:nowrap;}nav{flex-wrap:wrap;gap:16px;}}
+    @media(max-width:980px){.lightbox-button.prev{left:12px;}.lightbox-button.next{right:12px;}}
+      @media (max-width: 980px) {
+      header { justify-content: center; align-items: center; padding-bottom: 0; flex-wrap: wrap; gap: 12px; }
+      .brand { position: static; left: auto; font-size: 0.85rem; white-space: nowrap; width: 100%; text-align: center; }
+      nav {
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        flex-wrap: wrap;
+        overflow-x: auto;
+        width: 100%;
+      }
+      nav::-webkit-scrollbar { display: none; }
+    }
+
+    @media (max-width: 680px) {
+      header { justify-content: center; align-items: center; padding-bottom: 0; flex-wrap: wrap; gap: 12px; }
+      .brand { position: static; left: auto; font-size: 0.85rem; white-space: nowrap; width: 100%; text-align: center; }
+      nav {
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        flex-wrap: wrap;
+        overflow-x: auto;
+        width: 100%;
+      }
+      nav::-webkit-scrollbar { display: none; }
+      header { padding: 16px 18px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">RODRIGO MARTINS</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">Sobre</a>
+      <a href="portfolio.html">Fotografia</a>
+      <a class="active" href="arquitetura.html">Arquitetura</a>
+    </nav>
+  </header>
+  <main>
+    <section>
+      <div class="section-title"><h1>Escola de Surf</h1></div>
+      <p class="section-text">Este projeto propõe a criação de uma escola de surf numa zona costeira onde o surf é praticado. O edifício é inteiramente concebido em madeira, usando técnicas tradicionais inspiradas nos métodos construtivos japoneses. Juntamente com a escola de surf, a proposta inclui o desenvolvimento de um parque urbano, estabelecendo uma paisagem verde com pontos de referência e caminhos. A intervenção visa criar um espaço que possa ser utilizado tanto para caminhadas como para momentos de contacto com a natureza, integrando a estrutura arquitectónica no meio envolvente.</p>
+      <div class="image-grid">
+        <div class="image-card"><img src="arqui (13).jpg" alt="Surf School foto 1"></div>
+        <div class="image-card"><img src="arqui (14).jpg" alt="Surf School foto 2"></div>
+        <div class="image-card"><img src="arqui (15).jpg" alt="Surf School foto 3"></div>
+        <div class="image-card"><img src="arqui (16).jpg" alt="Surf School foto 4"></div>
+        <div class="image-card"><img src="arqui (21).JPG" alt="Surf School foto 5"></div>
+        <div class="image-card"><img src="arqui (23).JPG" alt="Surf School foto 6"></div>
+        <div class="image-card"><img src="arqui (24).JPG" alt="Surf School foto 7"></div>
+        <div class="image-card"><img src="arqui (25).JPG" alt="Surf School foto 8"></div>
+      </div>
+      <a class="back-link" href="arquitetura.html">← Voltar à galeria</a>
+      <div id="lightbox" class="lightbox">
+        <div class="lightbox-panel">
+          <button type="button" class="lightbox-close" aria-label="Fechar">×</button>
+          <button type="button" class="lightbox-button prev" aria-label="Anterior">‹</button>
+          <div class="lightbox-content"><img src="" alt="Imagem de fotografia"></div>
+          <button type="button" class="lightbox-button next" aria-label="Seguinte">›</button>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer>© 2026 Rodrigo Martins - Fotógrafo</footer>
+  <script src="https://cdn.jsdelivr.net/npm/heic2any/dist/heic2any.min.js"></script>
+  <script>
+    var images = ["arqui (13).jpg","arqui (14).jpg","arqui (15).jpg","arqui (16).jpg","arqui (23).JPG","arqui (24).JPG","arqui (25).JPG","arqui (21).JPG"];
+    var heicObjectUrls = {};
+    var galleryItems = document.querySelectorAll('.image-card');
+    var lightbox = document.getElementById('lightbox');
+    var lightboxImage = lightbox.querySelector('img');
+    var closeBtn = lightbox.querySelector('.lightbox-close');
+    var prevBtn = lightbox.querySelector('.lightbox-button.prev');
+    var nextBtn = lightbox.querySelector('.lightbox-button.next');
+    var currentIndex = 0;
+
+    galleryItems.forEach(function(item, index) {
+      item.dataset.index = index;
+      item.addEventListener('click', function() {
+        currentIndex = index;
+        openLightbox(currentIndex);
+      });
+    });
+
+    function isHeicPath(path) {
+      return /\.heic$/i.test(path);
+    }
+
+    function resolveImageURL(url) {
+      return heicObjectUrls[url] || encodeURI(url);
+    }
+
+    function updateLightboxImage(src) {
+      if (isHeicPath(src)) {
+        decodeHeicSrc(src).then(function(objectUrl) {
+          lightboxImage.src = objectUrl;
+        }).catch(function() {
+          lightboxImage.src = encodeURI(src);
+        });
+      } else {
+        lightboxImage.src = encodeURI(src);
+      }
+    }
+
+    function openLightbox(index) {
+      currentIndex = index;
+      updateLightboxImage(images[currentIndex]);
+      lightbox.classList.add('active');
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+    }
+
+    function changeLightbox(delta) {
+      currentIndex = (currentIndex + delta + images.length) % images.length;
+      updateLightboxImage(images[currentIndex]);
+    }
+
+    function loadScript(src) {
+      return new Promise(function(resolve, reject) {
+        var existing = document.querySelector('script[src="' + src + '"]');
+        if (existing) {
+          if (window.heic2any) return resolve();
+          existing.addEventListener('load', resolve);
+          existing.addEventListener('error', reject);
+          return;
+        }
+        var script = document.createElement('script');
+        script.src = src;
+        script.onload = resolve;
+        script.onerror = reject;
+        document.head.appendChild(script);
+      });
+    }
+
+    function loadHeicScript() {
+      if (window.heic2any) return Promise.resolve();
+      return loadScript('https://cdn.jsdelivr.net/npm/heic2any/dist/heic2any.min.js')
+        .catch(function() {
+          return loadScript('https://unpkg.com/heic2any/dist/heic2any.min.js');
+        });
+    }
+
+    function normalizeHeicResult(result) {
+      return Array.isArray(result) ? result[0] : result;
+    }
+
+    function decodeHeicSrc(src) {
+      if (heicObjectUrls[src]) return Promise.resolve(heicObjectUrls[src]);
+
+      function getArrayBuffer(path) {
+        return fetch(encodeURI(path)).then(function(response) {
+          if (!response.ok) throw new Error('Fetch failed');
+          return response.arrayBuffer();
+        }).catch(function() {
+          return new Promise(function(resolve, reject) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', encodeURI(path), true);
+            xhr.responseType = 'arraybuffer';
+            xhr.onload = function() {
+              if (xhr.status === 200 || xhr.status === 0) resolve(xhr.response);
+              else reject(new Error('XHR failed'));
+            };
+            xhr.onerror = function() { reject(new Error('XHR failed')); };
+            xhr.send();
+          });
+        });
+      }
+
+      return loadHeicScript()
+        .then(function() { return getArrayBuffer(src); })
+        .then(function(buffer) {
+          return heic2any({ blob: new Blob([buffer], { type: 'image/heic' }), toType: 'image/jpeg', quality: 0.95 });
+        })
+        .then(normalizeHeicResult)
+        .then(function(convertedBlob) {
+          var objectUrl = URL.createObjectURL(convertedBlob);
+          heicObjectUrls[src] = objectUrl;
+          return objectUrl;
+        });
+    }
+
+    function convertHeicImages() {
+      var heicImages = document.querySelectorAll('img[src$=".heic"], img[src$=".HEIC"]');
+      if (!heicImages.length) return;
+      heicImages.forEach(function(img) {
+        var src = img.getAttribute('src');
+        img.dataset.heicSrc = src;
+        img.removeAttribute('src');
+        decodeHeicSrc(src).then(function(objectUrl) {
+          img.src = objectUrl;
+        }).catch(function(error) {
+          console.error('HEIC conversion failed for', src, error);
+          img.src = encodeURI(src);
+        });
+      });
+    }
+
+    window.addEventListener('load', convertHeicImages);
+
+    prevBtn.addEventListener('click', function(event) { event.stopPropagation(); changeLightbox(-1); });
+    nextBtn.addEventListener('click', function(event) { event.stopPropagation(); changeLightbox(1); });
+    closeBtn.addEventListener('click', function(event) { event.stopPropagation(); closeLightbox(); });
+    lightbox.addEventListener('click', function(event) { if (event.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', function(event) {
+      if (!lightbox.classList.contains('active')) return;
+      if (event.key === 'ArrowLeft') changeLightbox(-1);
+      if (event.key === 'ArrowRight') changeLightbox(1);
+      if (event.key === 'Escape') closeLightbox();
+    });
+  </script>
+</body>
+</html>

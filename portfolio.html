@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fotografia | Rodrigo Martins</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;900&display=swap');
+
+    @font-face {
+      font-family: 'Carl Brown';
+      src: local('Carl Brown'), local('CarlBrown');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root {
+      --bg: #0b0b0f;
+      --panel: #121217;
+      --panel-strong: #1c1c24;
+      --text: #f6f6f8;
+      --muted: #9ca3af;
+      --accent: #f8b400;
+      --border: rgba(255,255,255,.08);
+      --radius: 24px;
+    }
+
+    * { box-sizing: border-box; }
+    img { max-width: 100%; height: auto; display: block; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: radial-gradient(circle at top, rgba(248,180,0,.15), transparent 30%),
+                  linear-gradient(180deg, #0b0b0f 0%, #070708 60%, #0f0f14 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px 36px;
+      backdrop-filter: blur(20px);
+      background: rgba(7,7,10,.9);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+
+    .brand {
+      position: absolute;
+      left: 36px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    nav {
+      display: flex;
+      gap: 72px;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color .2s ease;
+    }
+
+    nav a.active,
+    nav a:hover {
+      color: #fff;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 22px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(7,7,10,.95);
+      color: #fff;
+      text-decoration: none;
+      transition: transform .2s ease, background .2s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+      background: rgba(248,180,0,.15);
+    }
+
+    main {
+      width: min(1200px, calc(100% - 32px));
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0;
+    }
+
+    .section {
+      margin-top: 0;
+      min-height: calc(100vh - 94px);
+      padding: 80px 0;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 30px;
+    }
+
+    .section-title h2 {
+      margin: 0;
+      font-size: 2rem;
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .portfolio-item {
+      display: block;
+      position: relative;
+      overflow: hidden;
+      border-radius: 22px;
+      background: #101014;
+      border: 1px solid rgba(255,255,255,.07);
+      min-height: 240px;
+    }
+
+    .portfolio-item img {
+      width: 100%;
+      height: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      transition: transform .4s ease;
+      display: block;
+    }
+
+    .portfolio-item:hover img,
+    .portfolio-item:focus-within img,
+    .portfolio-item:active img {
+      transform: scale(1.08);
+    }
+
+    .portfolio-item .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 20px;
+      color: #fff;
+      font-family: 'Carl Brown', 'Playfair Display', Georgia, serif;
+      font-weight: 600;
+      font-size: 1.05rem;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity .25s ease, transform .25s ease;
+      pointer-events: none;
+    }
+
+    .portfolio-item:hover .overlay,
+    .portfolio-item:focus-within .overlay,
+    .portfolio-item:active .overlay,
+    .portfolio-item.visible .overlay {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .portfolio-item:hover img,
+    .portfolio-item:focus-within img,
+    .portfolio-item:active img,
+    .portfolio-item.visible img {
+      transform: scale(1.08);
+    }
+
+    footer {
+      text-align: center;
+      color: #717279;
+      padding: 28px 0 16px;
+      font-size: .95rem;
+    }
+
+    @media (max-width: 980px) {
+      header { justify-content: space-between; align-items: center; padding-bottom: 0; }
+      .brand { position: static; left: auto; font-size: 0.85rem; white-space: nowrap; }
+      nav {
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 16px;
+        flex-wrap: wrap;
+        overflow-x: auto;
+        width: auto;
+      }
+      nav::-webkit-scrollbar { display: none; }
+      .portfolio-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 680px) {
+      header { justify-content: space-between; align-items: center; padding-bottom: 0; }
+      .brand { position: static; left: auto; font-size: 0.85rem; white-space: nowrap; }
+      nav {
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 16px;
+        flex-wrap: wrap;
+        overflow-x: auto;
+        width: auto;
+      }
+      nav::-webkit-scrollbar { display: none; }
+      header { padding: 16px 18px; }
+      main { width: min(100%, calc(100% - 32px)); }
+      nav { gap: 16px; }
+      .portfolio-grid { grid-template-columns: 1fr; }
+      .portfolio-item { min-height: 320px; }
+    }
+      @media (max-width: 980px) {
+      header { justify-content: center; align-items: center; padding-bottom: 0; flex-wrap: wrap; gap: 12px; }
+      .brand { position: static; left: auto; font-size: 0.85rem; white-space: nowrap; width: 100%; text-align: center; }
+      nav {
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        flex-wrap: wrap;
+        overflow-x: auto;
+        width: 100%;
+      }
+      nav::-webkit-scrollbar { display: none; }
+    }
+
+    @media (max-width: 680px) {
+      header { justify-content: center; align-items: center; padding-bottom: 0; flex-wrap: wrap; gap: 12px; }
+      .brand { position: static; left: auto; font-size: 0.85rem; white-space: nowrap; width: 100%; text-align: center; }
+      nav {
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        flex-wrap: wrap;
+        overflow-x: auto;
+        width: 100%;
+      }
+      nav::-webkit-scrollbar { display: none; }
+      header { padding: 16px 18px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">RODRIGO MARTINS</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">Sobre</a>
+      <a href="portfolio.html">Fotografia</a>
+      <a href="arquitetura.html">Arquitetura</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="work" class="section">
+      <div class="section-title">
+        <h2>Galeria</h2>
+      </div>
+      <div class="portfolio-grid">
+        <a href="architecture.html" class="portfolio-item">
+          <img src="archi (21).JPG" alt="Architecture category">
+          <div class="overlay">Arquitetura</div>
+        </a>
+        <a href="urban.html" class="portfolio-item">
+          <img src="urban (1).JPG" alt="Urban category">
+          <div class="overlay">Rua</div>
+        </a>
+        <a href="landscape.html" class="portfolio-item">
+          <img src="landscape (6).JPG" alt="Landscape category">
+          <div class="overlay">Paisagem</div>
+        </a>
+        <a href="portrait.html" class="portfolio-item">
+          <img src="portrait (2).jpg" alt="Portrait category">
+          <div class="overlay">Retrato</div>
+        </a>
+        <a href="events.html" class="portfolio-item">
+          <img src="concerto (19).JPG" alt="Events category">
+          <div class="overlay">Eventos</div>
+        </a>
+        <a href="nature.html" class="portfolio-item">
+          <img src="nature.JPG" alt="Nature category">
+          <div class="overlay">Natureza</div>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>© 2026 Rodrigo Martins - Fotógrafo</footer>
+
+  <script>
+    const navLinks = document.querySelectorAll('header nav a');
+
+    const getCurrentPage = () => {
+      const current = window.location.pathname.split('/').pop();
+      return current ? current : 'index.html';
+    };
+
+    const updateActiveLink = () => {
+      const currentPage = getCurrentPage();
+      navLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        link.classList.toggle('active', href === currentPage || (href === 'index.html' && currentPage === 'index.html'));
+      });
+    };
+
+    updateActiveLink();
+
+    const portfolioItems = document.querySelectorAll('.portfolio-item');
+    const isTouchDevice = window.matchMedia('(hover: none)').matches || window.matchMedia('(pointer: coarse)').matches;
+
+    if (portfolioItems.length && isTouchDevice) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          entry.target.classList.toggle('visible', entry.intersectionRatio >= 0.35);
+        });
+      }, { threshold: [0.35] });
+
+      portfolioItems.forEach(item => observer.observe(item));
+    }
+  </script>
+</body>
+</html>
+
+
+
+
+
+

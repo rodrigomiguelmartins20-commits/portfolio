@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rodrigo Martins | Fotografia</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;900&display=swap');
+
+    @font-face {
+      font-family: 'Carl Brown';
+      src: local('Carl Brown'), local('CarlBrown');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root {
+      --bg: #0b0b0f;
+      --panel: #121217;
+      --panel-strong: #1c1c24;
+      --text: #f6f6f8;
+      --muted: #9ca3af;
+      --accent: #f8b400;
+      --border: rgba(255,255,255,.08);
+      --radius: 24px;
+    }
+
+    * { box-sizing: border-box; }
+    img { max-width: 100%; height: auto; display: block; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: radial-gradient(circle at top, rgba(248,180,0,.15), transparent 30%),
+                  linear-gradient(180deg, #0b0b0f 0%, #070708 60%, #0f0f14 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    h1 {
+      margin: 0 0 22px;
+      font-size: clamp(4rem, 7vw, 6rem);
+      line-height: 0.9;
+      font-family: 'Carl Brown', 'Playfair Display', Georgia, serif;
+      letter-spacing: -.04em;
+      font-weight: 700;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px 36px;
+      backdrop-filter: blur(20px);
+      background: rgba(7,7,10,.9);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+
+    .brand {
+      position: absolute;
+      left: 36px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    nav {
+      display: flex;
+      gap: 72px;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color .2s ease;
+    }
+
+    @media(max-width:980px) {
+      header {
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 0;
+      }
+      .brand {
+        position: static;
+        left: auto;
+        font-size: 0.85rem;
+        white-space: nowrap;
+      }
+      nav {
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 16px;
+        flex-wrap: wrap;
+        overflow-x: auto;
+        width: auto;
+      }
+      nav::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    nav a.active,
+    nav a:hover {
+      color: #fff;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 22px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(7,7,10,.95);
+      color: #fff;
+      text-decoration: none;
+      transition: transform .2s ease, background .2s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+      background: rgba(248,180,0,.15);
+    }
+
+    main {
+      width: min(1200px, calc(100% - 32px));
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0;
+    }
+
+    main::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 40px;
+      align-items: center;
+      padding: 60px 0 40px;
+      min-height: calc(100vh - 94px);
+    }
+
+    .hero-content {
+      max-width: 620px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: .2em;
+      font-size: .75rem;
+      margin-bottom: 22px;
+    }
+
+    .eyebrow::before {
+      content: '';
+      width: 36px;
+      height: 1px;
+      background: currentColor;
+      opacity: .6;
+    }
+
+    p.lead {
+      color: var(--muted);
+      font-size: 1.2rem;
+      max-width: 700px;
+    }
+
+    .hero-actions {
+      margin-top: 32px;
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .hero-image {
+      position: relative;
+      min-height: 420px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.08);
+      background: radial-gradient(circle at top, rgba(248,180,0,.18), transparent 32%);
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 30px;
+    }
+
+    .section {
+      margin-top: 0;
+      min-height: calc(100vh - 94px);
+      padding: 80px 0;
+    }
+
+    #about {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 40px 0;
+    }
+
+    .section:not(:first-of-type) {
+      border-top: 1px solid rgba(255,255,255,.08);
+    }
+
+    .section-title h2 {
+      margin: 0;
+      font-size: 2rem;
+    }
+
+    .section {
+      margin-top: 80px;
+    }
+
+    .section-text {
+      color: var(--muted);
+      max-width: 760px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .card {
+      background: rgba(255,255,255,.05);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+    }
+
+    .profile-card {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .profile-card img {
+      width: 100%;
+      border-radius: 22px;
+      object-fit: cover;
+      aspect-ratio: 1 / 1;
+    }
+
+    .skill-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .skill-list span {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text);
+      font-size: .95rem;
+    }
+
+    .skill-list span::before {
+      content: '•';
+      color: var(--accent);
+      font-size: 1.25rem;
+      line-height: 0;
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .portfolio-item {
+      display: block;
+      position: relative;
+      overflow: hidden;
+      border-radius: 22px;
+      background: #101014;
+      border: 1px solid rgba(255,255,255,.07);
+      min-height: 240px;
+    }
+
+    .portfolio-item img {
+      width: 100%;
+      height: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      transition: transform .4s ease;
+      display: block;
+    }
+
+    .portfolio-item:hover img {
+      transform: scale(1.08);
+    }
+
+    .portfolio-item .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 20px;
+      color: #fff;
+      font-family: 'Carl Brown', 'Playfair Display', Georgia, serif;
+      font-weight: 600;
+      font-size: 1.05rem;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity .25s ease, transform .25s ease;
+      pointer-events: none;
+    }
+
+    .portfolio-item:hover .overlay,
+    .portfolio-item:focus-within .overlay,
+    .portfolio-item:active .overlay,
+    .portfolio-item.preview-active .overlay {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .portfolio-item:hover img,
+    .portfolio-item:focus-within img,
+    .portfolio-item:active img,
+    .portfolio-item.preview-active img {
+      transform: scale(1.08);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 24px;
+    }
+
+    .contact-details {
+      display: grid;
+      gap: 16px;
+    }
+
+    .contact-details p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .contact-card {
+      background: rgba(255,255,255,.04);
+      border: 1px solid var(--border);
+      padding: 28px;
+      border-radius: var(--radius);
+    }
+
+    .contact-card label {
+      display: block;
+      margin-bottom: 10px;
+      font-size: .92rem;
+      color: var(--muted);
+    }
+
+    .contact-card input,
+    .contact-card textarea {
+      width: 100%;
+      padding: 14px 16px;
+      margin-bottom: 18px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      font: inherit;
+      resize: vertical;
+    }
+
+    .contact-card textarea {
+      min-height: 180px;
+    }
+
+    .contact-card button {
+      border: 0;
+      border-radius: 999px;
+      padding: 14px 24px;
+      background: var(--accent);
+      color: #111;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    footer {
+      text-align: center;
+      color: #717279;
+      padding: 28px 0 16px;
+      font-size: .95rem;
+    }
+
+    @media (max-width: 980px) {
+      header { justify-content: space-between; align-items: center; padding-bottom: 0; }
+      .brand { position: static; left: auto; font-size: 0.85rem; white-space: nowrap; }
+      nav {
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 16px;
+        flex-wrap: wrap;
+        overflow-x: auto;
+        width: auto;
+      }
+      nav::-webkit-scrollbar { display: none; }
+      .hero { grid-template-columns: 1fr; }
+      .portfolio-grid { grid-template-columns: 1fr; }
+      .grid-2, .contact-grid, .profile-card { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 680px) {
+      header { justify-content: space-between; align-items: center; padding-bottom: 0; }
+      .brand { position: static; left: auto; font-size: 0.85rem; white-space: nowrap; }
+      nav {
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 16px;
+        flex-wrap: wrap;
+        overflow-x: auto;
+        width: auto;
+      }
+      nav::-webkit-scrollbar { display: none; }
+      header { padding: 16px 18px; }
+      main { width: min(100%, calc(100% - 32px)); }
+      nav { gap: 16px; }
+      .eyebrow { font-size: .7rem; }
+      .hero-actions { flex-direction: column; align-items: stretch; }
+      .button { width: 100%; justify-content: center; }
+      .hero-image { min-height: 280px; }
+    }
+      @media (max-width: 980px) {
+      header { justify-content: center; align-items: center; padding-bottom: 0; flex-wrap: wrap; gap: 12px; }
+      .brand { position: static; left: auto; font-size: 0.85rem; white-space: nowrap; width: 100%; text-align: center; }
+      nav {
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        flex-wrap: wrap;
+        overflow-x: auto;
+        width: 100%;
+      }
+      nav::-webkit-scrollbar { display: none; }
+    }
+
+    @media (max-width: 680px) {
+      header { justify-content: center; align-items: center; padding-bottom: 0; flex-wrap: wrap; gap: 12px; }
+      .brand { position: static; left: auto; font-size: 0.85rem; white-space: nowrap; width: 100%; text-align: center; }
+      nav {
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        flex-wrap: wrap;
+        overflow-x: auto;
+        width: 100%;
+      }
+      nav::-webkit-scrollbar { display: none; }
+      header { padding: 16px 18px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">RODRIGO MARTINS</div>
+    <nav>
+      <a href="index.html" class="active">Home</a>
+      <a href="about.html">Sobre</a>
+      <a href="portfolio.html">Fotografia</a>
+      <a href="arquitetura.html">Arquitetura</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="hero">
+      <div class="hero-content">
+        <div class="eyebrow">Fotógrafo</div>
+        <h1>PORTFÓLIO</h1>
+        <p class="lead">Trabalhos selecionados</p>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <div class="section-title">
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Quem sou?</h3>
+          <p class="section-text">Estudante de arquitetura com paixão pela fotografia.</p>
+        </div>
+        <div class="profile-card">
+          <img src="eu.JPG" alt="Foto de perfil de Rodrigo Martins">
+          <div>
+            <p><strong>Email</strong><br>rodrigomiguelmartins20@gmail.com</p>
+            <p><strong>Telefone</strong><br>+351 915 652 248</p>
+            <p><strong>Localização</strong><br>Porto, Portugal</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>© 2026 Rodrigo Martins - Fotógrafo</footer>
+
+  <script>
+    const navLinks = document.querySelectorAll('header nav a');
+
+    const getCurrentPage = () => {
+      const current = window.location.pathname.split('/').pop();
+      return current ? current : 'index.html';
+    };
+
+    const updateActiveLink = () => {
+      const currentPage = getCurrentPage();
+      navLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        link.classList.toggle('active', href === currentPage || (href === 'index.html' && currentPage === 'index.html'));
+      });
+    };
+
+    updateActiveLink();
+  </script>
+
+</body>
+
+
+
+
+
